@@ -5,10 +5,15 @@ import { CreateUserInput } from "../schema/user.schema";
 
 export async function createUserHandler(req: Request<{}, {}, CreateUserInput["body"]>, res: Response) {
     try {
-        const user = await createUser(req.body)
-        return user;
+        // Await the createUser function to get the user object
+        const user = await createUser(req.body);
+        
+        // Send the user object as JSON response
+        res.json(user);
     } catch (e: any) {
-        logger.error(e)
-        return res.status(409).send(e.message)
+        // Log the error
+        logger.error(e);
+        // Send an error response with status code 409 and error message
+        res.status(409).send(e.message);
     }
 }
