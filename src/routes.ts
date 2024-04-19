@@ -14,10 +14,10 @@ function routes(app: Express) {
     app.post("/api/sessions", validateResource(createSessionSchema), createUserSessionHandler);
     app.get("/api/sessions", requireUser, getUserSessionHandler);
     app.delete("/api/sessions", requireUser, deleteUserSessionHandler);
-    // app.post("/api/products", [requireUser, validateResource(createProductSchema)], createProductHandler);
-    // app.put("/api/products/update", [requireUser, validateResource(updateProductSchema)], updateProductHandler);
-    // app.get("/api/products/get", validateResource(getProductSchema), getProductHandler);
-    // app.delete("/api/products/delete", [requireUser, validateResource(deleteProductSchema)], deleteProductHandler);
+    app.post("/api/products", [requireUser, validateResource(createProductSchema)], createProductHandler);
+    app.put("/api/products/update/:productId", [requireUser, validateResource(updateProductSchema)], updateProductHandler);
+    app.get("/api/products/get/:productId", validateResource(getProductSchema), getProductHandler);
+    app.delete("/api/products/delete/:productId", [requireUser, validateResource(deleteProductSchema)], deleteProductHandler);
     
 }
 
