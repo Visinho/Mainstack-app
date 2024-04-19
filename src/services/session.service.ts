@@ -21,13 +21,15 @@ export async function updateSession(query: FilterQuery<SessionDocument>, update:
 }
 
 export async function reIssueAccessToken({refreshToken}: {
-  refreshToken: string
+  refreshToken: string | string[]
 }) {
+  refreshToken = Array.isArray(refreshToken) ? refreshToken[0] : refreshToken;
+  
   const {decoded} = verifyJwt(refreshToken);
 
   if(!decoded || !get(decoded, "_id")) return false;
 
-  const session =await SessionModel.findById(get(decoded, "_id"));
+  const session = await SessionModel.findById(get(decoded, "_id"));
 
   if(!session || !session.valid) return false;
 
