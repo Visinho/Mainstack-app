@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateProductInput, UpdateProductInput } from "../schema/product.schema";
-import { UpdateProduct, createProduct, getProduct } from "../services/product.service";
+import { UpdateProduct, createProduct, deleteProduct, getProduct } from "../services/product.service";
 
 export async function createProductHandler(req: Request<{}, {}, CreateProductInput["body"]>, res: Response) {
     try {
@@ -83,8 +83,38 @@ export async function updateProductHandler(
     }
 }
 
+export async function deleteProductHandler(
+  req: Request<UpdateProductInput["params"]>,
+  res: Response
+) {
+  try {
+    // Extract user ID from the request
+    const userId = res.locals.user._id;
 
+    // Extract product ID from the request parameters
+    const productId = req.params.productId;
 
-export async function deleteProductHandler(req: Request, res: Response) {
+    // Find the product by ID
+    const product = await getProduct({ productId });
 
+    // If product is not found, return 404
+    if (!product) {
+      return res.sendStatus(404);
+    }
+
+    // Check if the user is authorized to delete the product
+    if (String(product.user) !== userId) {
+      return res.sendStatus(403);
+    }
+
+    // Delete the product
+    await deleteProduct({ productId });
+
+    // Send a success response
+    return res.sendStatus(200);
+  } catch (error) {
+    // Handle errors
+    console.error('Error deleting product:', error);
+    return res.status(500).send('Internal Server Error');
+  }
 }
