@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateProductInput, UpdateProductInput } from "../schema/product.schema";
-import { createProduct, getProduct } from "../services/product.service";
+import { UpdateProduct, createProduct, getProduct } from "../services/product.service";
 
 export async function createProductHandler(req: Request<{}, {}, CreateProductInput["body"]>, res: Response) {
     try {
@@ -44,11 +44,45 @@ export async function getProductHandler(req: Request<UpdateProductInput["params"
     }
 }
 
+export async function updateProductHandler(
+    req: Request<UpdateProductInput["params"], {}, UpdateProductInput["body"]>,
+    res: Response
+) {
+    try {
+        // Extract user ID from the request
+        const userId = res.locals.user._id;
 
+        // Extract product ID from the request parameters
+        const productId = req.params.productId;
 
-export async function updateProductHandler(req: Request<UpdateProductInput["params"]>, res: Response) {
+        // Extract update data from the request body
+        const update = req.body;
 
+        // Find the product by ID
+        const product = await getProduct({ productId });
+
+        // If product is not found, return 404
+        if (!product) {
+            return res.sendStatus(404);
+        }
+
+        // Check if the user is authorized to update the product
+        if (String(product.user) !== userId) {
+            return res.sendStatus(403);
+        }
+
+        // Update the product and get the updated document
+        const updatedProduct = await UpdateProduct({ productId }, update, { new: true });
+
+        // Send the updated product in the response
+        return res.send(updatedProduct);
+    } catch (error) {
+        // Handle errors
+        console.error('Error updating product:', error);
+        return res.status(500).send('Internal Server Error');
+    }
 }
+
 
 
 export async function deleteProductHandler(req: Request, res: Response) {
