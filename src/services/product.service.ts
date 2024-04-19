@@ -5,11 +5,11 @@ export async function createProduct(input: ProductInput) {
     return ProductModel.create(input)
 }
 
-export async function findProduct(query: FilterQuery<ProductDocument>, options: QueryOptions = {lean: true}) {
+export async function getProduct(query: FilterQuery<ProductDocument>, options: QueryOptions = {lean: true}) {
     return ProductModel.findOne(query, {}, options);
 }
 
-export async function findAndUpdateProduct(query: FilterQuery<ProductDocument>, update: UpdateQuery<ProductDocument>, options: QueryOptions) {
+export async function UpdateProduct(query: FilterQuery<ProductDocument>, update: UpdateQuery<ProductDocument>, options: QueryOptions) {
     return ProductModel.findOneAndUpdate(query, update, options)
 }
 
