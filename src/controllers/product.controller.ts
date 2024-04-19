@@ -4,13 +4,16 @@ import { createProduct, getProduct } from "../services/product.service";
 
 export async function createProductHandler(req: Request<{}, {}, CreateProductInput["body"]>, res: Response) {
     try {
+        // Extract user ID from the request's local variables
         const userId = res.locals.user._id;
+
+        // Extract product details from the request body
         const body = req.body;
 
-        // Call the service function to create a product
+        // Create the product, including the user ID
         const product = await createProduct({ ...body, user: userId });
 
-        // Send the product in the response
+        // Send the created product in the response
         return res.send(product);
     } catch (error) {
         // Handle errors
@@ -19,19 +22,20 @@ export async function createProductHandler(req: Request<{}, {}, CreateProductInp
     }
 }
 
-export async function getProductHandler(req: Request, res: Response) {
+export async function getProductHandler(req: Request<UpdateProductInput["params"]>, res: Response) {
     try {
+        // Extract the product ID from the request parameters
         const productId = req.params.productId;
 
-        // Call the service function to get the product
+        // Find the product by its ID
         const product = await getProduct({ productId });
 
-        // If the product is not found, send a 404 response
+        // If no product is found, return a 404 status
         if (!product) {
             return res.sendStatus(404);
         }
 
-        // Send the product in the response
+        // If the product is found, send it in the response
         return res.send(product);
     } catch (error) {
         // Handle errors
@@ -39,6 +43,7 @@ export async function getProductHandler(req: Request, res: Response) {
         return res.status(500).send('Internal Server Error');
     }
 }
+
 
 
 export async function updateProductHandler(req: Request<UpdateProductInput["params"]>, res: Response) {
