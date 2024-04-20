@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "1337:1337"  
+    depends_on:
+      - database
+    environment:
+      - NODE_ENV=production
+
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=adminadmin
+      - MONGO_INITDB_ROOT_PASSWORD=adminadmin
+
+volumes:
+  mongodb_data:
