@@ -1,10 +1,11 @@
+// import dotenv from "dotenv"; 
 import jwt from "jsonwebtoken";
 import config from "config";
 
 const privateKey = config.get<string>("privateKey");
 const publicKey = config.get<string>("publicKey");
 
-// import dotenv from "dotenv"; 
+
 
 // Load environment variables from .env file
 // dotenv.config();

@@ -1,4 +1,4 @@
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import express from "express";
 import config from "config";
 import connect from "./utils/connect";
@@ -13,7 +13,7 @@ import deserializeUser from "./middlewares/deserializeUser";
 const port = config.get<number>("port");
 
 // Load environment variables from .env file
-// dotenv.config(); 
+dotenv.config(); 
 
 const app = express();
 

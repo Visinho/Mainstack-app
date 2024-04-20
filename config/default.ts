@@ -1,6 +1,10 @@
+import dotenv from 'dotenv';
+
+dotenv.config(); 
+
 export default {
     port: 1337,
-    dbUri: "mongodb+srv://adminadmin:adminadmin@cluster0.0gu2m.mongodb.net/Main-app?retryWrites=true&w=majority",
+    dbUri: process.env.DB_URI,
     saltWorkFactor: 10,
     accessTokenTtl: "45m",
     refreshTokenTtl: "1y",
