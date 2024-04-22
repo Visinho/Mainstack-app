@@ -32,7 +32,7 @@ export async function getProductHandler(req: Request<UpdateProductInput["params"
 
         // If no product is found, return a 404 status
         if (!product) {
-            return res.sendStatus(404);
+            return res.status(404).send("Product not found!");
         }
 
         // If the product is found, send it in the response
@@ -63,12 +63,12 @@ export async function updateProductHandler(
 
         // If product is not found, return 404
         if (!product) {
-            return res.sendStatus(404);
+            return res.status(404).send("Product not found!");
         }
 
         // Check if the user is authorized to update the product
         if (String(product.user) !== userId) {
-            return res.sendStatus(403);
+            return res.status(403).send("You are not authorized to update this product!");
         }
 
         // Update the product and get the updated document
@@ -104,14 +104,14 @@ export async function deleteProductHandler(
 
     // Check if the user is authorized to delete the product
     if (String(product.user) !== userId) {
-      return res.sendStatus(403);
+        return res.status(403).send("You are not authorized to update this product!");
     }
 
     // Delete the product
     await deleteProduct({ productId });
 
     // Send a success response
-    return res.sendStatus(200);
+    return res.status(200).send("Successfully deleted!");
   } catch (error) {
     // Handle errors
     console.error('Error deleting product:', error);
