@@ -662,11 +662,6 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/config@^3.3.4":
-  version "3.3.4"
-  resolved "https://registry.npmjs.org/@types/config/-/config-3.3.4.tgz"
-  integrity sha512-qFiTLnWy+TdPSMIXFHP+87lFXFRM4SXjRS+CSB66+56TrpLNw003y1sh7DGaaC1NGesxgKoT5FDy6dyA1Xju/g==
-
 "@types/connect@*":
   version "3.4.38"
   resolved "https://registry.npmjs.org/@types/connect/-/connect-3.4.38.tgz"
@@ -1324,13 +1319,6 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
-
-config@^3.3.11:
-  version "3.3.11"
-  resolved "https://registry.npmjs.org/config/-/config-3.3.11.tgz"
-  integrity sha512-Dhn63ZoWCW5EMg4P0Sl/XNsj/7RLiUIA1x1npCy+m2cRwRHzLnt3UtYtxRDMZW/6oOMdWhCzaGYkOcajGgrAOA==
-  dependencies:
-    json5 "^2.2.3"
 
 console-control-strings@^1.0.0, console-control-strings@^1.1.0:
   version "1.1.0"

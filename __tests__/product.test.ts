@@ -1,7 +1,7 @@
 import supertest from "supertest";
-import { createProduct } from "../services/product.service";
+import { createProduct } from "../src/services/product.service";
 import mongoose from "mongoose";
-import { signJwt } from "../utils/jwt.utils";
+import { signJwt } from "../src/utils/jwt.utils";
 import express, { Express } from 'express';
 
 const app: Express = express();

@@ -1,5 +1,6 @@
+import { ENV_VAR } from './../config/config';
 import { Request, Response } from "express";
-import config from "config";
+// import config from "config";
 import { validatePassword } from "../services/user.service";
 import { signJwt } from "../utils/jwt.utils";
 import { createSession, findSessions, updateSession } from "../services/session.service";
@@ -20,13 +21,15 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 
   const accessToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: config.get("accessTokenTtl") } 
+    // { expiresIn: config.get("accessTokenTtl") } 
+    { expiresIn: ENV_VAR.accessTokenTtl} 
   );
 
   // create a refresh token
   const refreshToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: config.get("refreshTokenTtl") } 
+    // { expiresIn: config.get("refreshTokenTtl") } 
+    { expiresIn: ENV_VAR.refreshTokenTtl} 
   );
 
   // return access & refresh tokens

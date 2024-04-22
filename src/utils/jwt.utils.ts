@@ -1,9 +1,13 @@
 // import dotenv from "dotenv"; 
 import jwt from "jsonwebtoken";
-import config from "config";
+import { ENV_VAR } from "../config/config";
+// import config from "config";
 
-const privateKey = config.get<string>("privateKey");
-const publicKey = config.get<string>("publicKey");
+// const privateKey = config.get<string>("privateKey");
+// const publicKey = config.get<string>("publicKey");
+
+const privateKey = ENV_VAR.privateKey;
+const publicKey = ENV_VAR.publicKey;
 
 
 

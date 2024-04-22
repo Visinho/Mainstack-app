@@ -3,7 +3,8 @@ import SessionModel, { SessionDocument } from "../models/session.model";
 import { signJwt, verifyJwt } from "../utils/jwt.utils";
 import { get } from "lodash";
 import { findUser } from "./user.service";
-import config from "config";
+import { ENV_VAR } from "../config/config";
+// import config from "config";
 
 
 export async function createSession(userId: string, userAgent: string) {
@@ -39,7 +40,8 @@ export async function reIssueAccessToken({refreshToken}: {
 
   const accessToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: config.get("accessTokenTtl") } 
+    // { expiresIn: config.get("accessTokenTtl") } 
+    { expiresIn: ENV_VAR.accessTokenTtl } 
   );
 
   return accessToken;

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import config from "config";
+import { ENV_VAR } from "../config/config";
+// import config from "config";
+
 
 export interface UserInput {
   email: string;
@@ -32,7 +34,8 @@ userSchema.pre("save", async function (next) {
     return next();
   }
 
-  const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
+  // const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
+  const salt = await bcrypt.genSalt(ENV_VAR.saltWorkFactor);
 
   const hash = await bcrypt.hashSync(user.password, salt);
 
