@@ -15,6 +15,6 @@ export async function createUserHandler(req: Request<{}, {}, CreateUserInput["bo
         // Log the error
         logger.error(e);
         // Send an error response with status code 409 and error message
-        res.status(409).send(e.message);
+        res.status(409).send('User creation failed. Please try again later.')
     }
 }
