@@ -4,7 +4,8 @@ dotenv.config();
 
 export const ENV_VAR = {
   port: 1337,
-  dbUri: process.env.DB_URI!,
+  // dbUri: process.env.DB_URI!,
+  dbUri: "mongodb+srv://adminadmin:adminadmin@cluster0.0gu2m.mongodb.net/Main-app?retryWrites=true&w=majority",
   saltWorkFactor: 10,
   accessTokenTtl: "45m",
   refreshTokenTtl: "1y",
