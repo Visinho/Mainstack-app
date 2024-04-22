@@ -20,11 +20,15 @@ const app = express();
 app.use(express.json());
 // app.use(bodyParser.json());
 
+connect();
+
 app.use(deserializeUser);
+
+
+routes(app)
 
 app.listen(port, async () => {
     logger.info(`App is running at http://localhost:${port}`);
 
-    await connect();
-    routes(app)
+    
 })
