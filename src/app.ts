@@ -1,4 +1,5 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
+require("dotenv").config();
 import express from "express";
 // import config from "config";
 import connect from "./utils/connect";
@@ -16,7 +17,7 @@ import { ENV_VAR } from './config/config';
 const port = ENV_VAR.port;
 
 // Load environment variables from .env file
-dotenv.config(); 
+// dotenv.config(); 
 
 const app = express();
 
